@@ -111,3 +111,10 @@ Git 버전 관리 시스템
         어떤 버전도 삭제하지 않는다.(눈에 보이지 않을 뿐이다.)
         commit id만 알고있다면 git checkout commitid로 돌아갈 수 있다.
 
+4. Branch : 하나의 프로젝트 안에서 n개의 프로젝트를 진행하는 효과
+    1) commitid를 기억하는 것은 어렵다. commitid가 이름을 가지고 있으면 얼마나 좋을까? exp가 detached상태의 last commit을 가르킨다면?
+        -> 하나의 저장소에서 다양한 작업이 가능하다.
+    2) 현재 HEAD가 가르키고 있는 commitid를 가르키는 exp라는 이름의 branch를 생성
+        $ git branch exp
+    3) master는 default branch이다!
+    4) VSC의 Extention에 git graph를 사용하여 더블클릭으로 branch를 쉽게 변경하여 작업할 수 있다.
