@@ -56,3 +56,35 @@
         1) 년도.달 16.04 LTS, 17,04 LTS, 18,04 LTS...
         2) 버전 번호 뒤에 LTS는 Long Term Support의 약어로 가장 안정적인 버전!
 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+4. linux 기본 명령어
+
+    (1) shell : Shell은 커널과 사용자 사이를 이어주는 역할 사용자의 명령을 해석하여 커널에 명령을 요청
+        1) Bourne-Again Shell : bash - bash는 GNU 프로젝트의 일환으로 개발됨리눅스의 기본 Shell은 bash
+        2) Bourne Shell : Sh
+        3) C Shell : csh
+        4) Korn Shell : Ksh
+
+    (2) whoami : 로그인한 사용자 ID를 알려주는 명령어 == id -un
+        1) VSCode 환경에서
+            * ctrl/cmd + ' : 윈도우 환경에서 터미널은 여는 단축키
+            * ctrl + , : setting 환경 - terminal.integrated.shell.windows
+                ** { /*git설치경로*/
+                    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"
+                    }
+    (3) passwd : 로그인한 사용자의 비밀번호를 변경하는 명령어
+    (4) pwd : 현재 디렉토리 출력 print working directory
+    (5) ls : 현재 디렉토리의 목록을 출력
+        ls -l : 리스트 형태로 보기
+        ls -a : 숨긴 파일,폴더도 출력
+        ls -al : 숨긴 파일 포함하여 리스트 형태로 출력
+    (6) cd : 해당 디렉터리로 경로 이동 change directory
+    (7) --help : 배쉬 전체 명령이나 명령 --help는 자세한 사용법 출력
+    (8) .sh 파일 : 쉘 스크립트 파일, 쉘 환경 구성을 위한 choco install ~~  등의 명령을 담아놓고 편하게 실행가능하다(reinstall.sh)
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+5. GUI vs CLI
+    (1) 이전에 충분히 설명했으므로 넘어감. window나 mac 모두 GUI환경을 지원하며, ubuntu도 GUI 환경을 지원한다.
+
