@@ -149,3 +149,52 @@
         L4      4       R4          ?                   ?(사람이 해야함)
                                     1/4자동병합         3/4자동병합
 
+--------------------------------------------------------------------------------------------------------------------------------------
+
+8. git의 다양한 특징
+
+    (1) SVN(SubVersion)과 git의 차이
+        1) git은 SVN과 달리 각 개발자가 중앙 집중된 서버 저장소와 독립된 상태로 작업할 수 있다.
+
+    (2) git은 Working Directory(작업 영역), Staging Area(준비 영역), Repository(저장소) 세 영역으로 나뉜다.
+        1) git의 영역에 포함되지 않은 Standing Kernle(커널 영역)이란? 운영체제와 사용자간의 터널 역할(터미널 등)
+
+    (3) 깃 버전과 초기설정
+        1) 깃 버전 확인
+            $ git --version
+                git version 2.30.0.windows.1
+        2) 깃 사용시 유저정보를 컴퓨터 전체에 저장(비밀번호는 필요할 때마다 입력해야한다.)
+            $ git config --global user.name " "
+            $ git config --global user.email " "
+            --global을 사용하지 않으면 저장소마다 다르게 적용 가능하다.
+        3) 설정 정보 확인
+            $ git config --list
+                diff.astextplain.textconv=astextplain    
+                filter.lfs.clean=git-lfs clean -- %f     
+                filter.lfs.smudge=git-lfs smudge -- %f   
+                filter.lfs.process=git-lfs filter-process
+                filter.lfs.required=true
+                http.sslbackend=openssl
+                http.sslcainfo=C:/Program Files/Git/mingw64/ssl/certs/ca-bundle.crt
+                core.autocrlf=true
+                core.fscache=true
+                core.symlinks=false
+                pull.rebase=false
+                credential.helper=manager-core
+                credential.https://dev.azure.com.usehttppath=true
+                init.defaultbranch=master
+                user.email=moey920@naver.com
+                user.name=rohharam
+                alias.l=log --oneline --all --decorate --graph
+                core.editor=code --wait
+                core.repositoryformatversion=0
+                core.filemode=false
+                core.bare=false
+                core.logallrefupdates=true
+                core.symlinks=false
+                core.ignorecase=true
+                remote.origin.url=https://kdt-gitlab.elice.io/Rohharam/remote_repo.git
+                remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+                branch.master.remote=origin
+                branch.master.merge=refs/heads/master
+
