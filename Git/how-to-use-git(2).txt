@@ -89,3 +89,18 @@
                 git commit -am "work 3"; git push : 지역저장소에서 수정 내용을 커밋하고, 원격 저장소에 백업한다.
 
         8) 별도의 컴퓨터에 네트워크를 연결해서 원격 저장소를 만드는 법 : git remote repository service(github, gitlab..)
+
+        9) 네트워크의 원격 저장소의 주소와, 홈페이지 주소는 다르다.
+            https://kdt-gitlab.elice.io/Rohharam/remote_repo.git
+
+        10) Push an existing folder : 이미 존재하는 폴더로 push
+            cd existing_folder
+            git init
+            git remote add origin https://kdt-gitlab.elice.io/Rohharam/remote_repo.git
+            git add .
+            git commit -m "Initial commit"
+            git push -u origin master
+            10-1) VCS로 새로운 폴더를 열고, 위와 같이 진행하여 네트워크 상의(gitlab) 원격 저장소를 연결시키고 push한다.
+                To https://kdt-gitlab.elice.io/Rohharam/remote_repo.git
+                * [new branch]      master -> master
+                Branch 'master' set up to track remote branch 'master' from 'origin'.
