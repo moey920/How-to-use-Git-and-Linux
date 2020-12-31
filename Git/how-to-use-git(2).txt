@@ -1,1 +1,13 @@
+1. commit option
+    (1) git commit -am "[커밋 명]" 
+        1) -am 옵션은 untracked 상태의 파일은 커밋하지 않는다, add가 완료된 상태의 파일만 커밋한다.
+        2) 원래는 git add, git commit -m 을 따로 해줘야한다.
 
+    (2) amned : 커밋 메세지 바꾸기
+        1) git commit --amend -m "work 5 수정" : 커밋 내용을 실수 했을 때 새로 커밋하는 옵션, 자세한 내용은 추가로 알아보기
+        2) commit id가 변경된다. 전버전의 commit id를 찾으면 언제든지 다시 돌아갈 수 있다.
+        3) git은 언제든지 모든 내용을 저장한다는 사실을 알 수 있다.
+
+2. commit id
+    (1) SHA1 : 단방향 암호 시스템
+        1) 어떤 글자, 용량의 파일을 넣어도 40여 글자 암호로 변환된다.
