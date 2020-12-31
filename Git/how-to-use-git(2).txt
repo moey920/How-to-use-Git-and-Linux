@@ -198,3 +198,12 @@
                 branch.master.remote=origin
                 branch.master.merge=refs/heads/master
 
+    (4) 파일의 상태 라이프 사이클
+        Untracked   Unmodified  Modified    Staged
+          |            |              |          |
+        Add the file---------------------------->|
+          |          Edit the file--->|          | 
+          |            |        Stage the file-->|
+          | <-------Remove the file   |          |
+          |            |<-------------------Commit
+
