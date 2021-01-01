@@ -259,3 +259,39 @@
             2-6) pull을 완료하고 git stash apply로 가장 최근에 저장한 stash를 불러 올 수 있습니다
             2-7) 주의점 : stash는 staging되었던 상태의 파일들을 불러올 때 다시 staging시켜 주지 않는다.
                     staging을 유지시켜 주기 위해서는 --index 옵션을 주면 된다.
+
+    (2) 로그인 오류
+
+        1) push/pull 명령어 사용시 패스워드를 잘못 입력하였을 때, git이 패스워드를 다시 묻지 않고 Authenticate 오류를 발생시키는 경우
+            $ git push (or) $ git pull
+            remote: Invalid username or password.
+            fatal: Authentication failed for 'https://git@gitlab.com/…
+
+        2) GCM(git credential manager)
+            2-1) 보통 http는 ssh의 인증방식과 다르게 한 번 git 웹 호스팅 서비스에 등록을 하면 자동으로 인증되는 방식이 아니라
+                매번 원격저장소에 접근 시 아이디와 패스워드를 입력해 줘야하는 단점이 있다.
+
+            2-2) credential 저장소는 이러한 인증정보를 저장해두고 자동으로 입력해주는 시스템이다.
+                이때 잘못된 패스워드를 자동으로 git이 입력하기 때문에 앞선 오류가 발생하게 된다.
+
+            2-3) 잘못 지정한 인증정보 초기화 명령어
+                git config --system --unset credential.helper
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+8. 트래킹 브랜치
+
+    (1) origin/master
+    
+        1) 원격저장소 역시 git 저장소이다. 다만, working directory가 존재하지 않으며 이를 bare 저장소라고 부른다.
+
+        2) Git fetch 또는 git pull 을 이용해서 원격저장소를 동기화 하게 되면 origin/master 브랜치가 생긴다.
+            이 브랜치를 트래킹 브랜치라고 부른다.
+
+        3) 트래킹 브랜치는 원격저장소의 브랜치가 어디에 위치하는지를 보여준다.
+
+        4) 트래킹 브랜치
+            4-1) 브랜치이지만 checkout 할 수 없다.
+            4-2) 가리키고 있는 commit의 위치를 강제로 변경할 수 없다.
+            4-3) git merge origin/master로 merge가 가능하다.
+    
