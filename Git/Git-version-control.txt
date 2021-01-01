@@ -77,3 +77,135 @@
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
+
+5. Git 심화정보
+
+    (1) Index : git add로 Staging 되어있는 데이터들
+
+    (2) HEAD : 마지막 커밋을 가리키는 snapshot
+
+        1) HEAD 역시 snapshot이며 후에 배울 branch에서 현재 우리가 위치해있는 branch를 가리키는 포인터의 역할을 수행
+
+        2) HEAD를 이용한 버전 관리 
+            2-1) git reset --<option> HEAD~ : HEAD를 전의 snapshot으로 이동시킬 수 있다.
+
+            2-2) git reset --soft HEAD~ : 예전 버전으로 돌아가 commit을 수정할 수 있다.(Default)
+                $git log --pretty=oneline
+                eba263 (HEAD->master) add changed3c3d init commit
+                $git reset --soft HEAD~
+                $git log --pretty=oneline
+                d3c3d (HEAD->master) init commit
+                $git commit -m “modified message”
+                $git log --pretty=oneline39ae2 (HEAD->master) modifies me..
+                d3c3d init commit
+
+            2-3) git reset --hard HEAD~ : working directory에 존재하는 파일도 사라진다.
+
+    (3) snapshot : staging 되어진 데이터들(Index)을 commit 명령으로 영구히 저장한 것
+
+    (4) rebase : 브랜치가 너무 많아져서 history 정리가 필요한 상황에 사용
+
+        1) 그래프를 선형으로 만든다
+
+        2) 공통된 부모까지의 commit을 가져와 원하는 브랜치 옆에 이어붙인다.
+
+    (5) rebase conflict 해결하기 : merge와 마찬가지로 rebase 과정 중에서도 충돌이 발생할 수 있다.
+
+        1) 오류예시
+
+            $git status
+            rebase in progress; onto1522887
+            You are currently rebasing branch 'cat' on '1522887'.
+                (fix conflicts and then run "git rebase --continue")
+                (use "git rebase --abort" to check out the original branch)
+            Unmerged paths:
+                (use "git restore --staged <file>..." to unstage)
+                (use "git add <file>..." to mark resolution)
+                    both modified:   client_file
+            no changes added to commit (use "git add" and/or "git commit -a")
+
+        2) 해결방법 
+
+            2-1) client_file에서 발생한 충돌을 해결하고 git add 명령을 수행해서 client_file을 staging 해준다.
+
+            2-2) staging 되었다면 이를 git rebase --continue를 이용해서 rebase를 마무리한다.
+
+            2-3) 후에 master를 cat으로 merge뿐만 아니라 rebase로도 fast-forward 시켜줄 수 있다.
+
+        3) 결론 : git rebase master란?
+            3-1) 현재 위치해 있는 브랜치의 commit부터 master의 공통된 부모 전까지의 commit을 master옆에 이어붙인다는 의미
+
+    (6) 저장소 동기화 파헤치기
+
+        1) 로컬 저장소와 원격 저장소를 서로 동기화 시키기 위해서는 아래의 2개의 과정을 거쳐야한다.
+
+            1-1) remote저장소의 이름을 지정해준다
+                git remote add origin https://github.com/group/project
+                
+            1-2) 트래킹 브랜치를 설정해서 push 또는 pull을 한다
+                git pull origin master
+                git push --set-upstream origin master
+
+        2) 그냥 git pull, git push를 하면 안되는걸까?
+
+            2-1) 최초로 원격 저장소를 pull하게 되면 다음과 같은 메시지를 볼 수 있다.
+                $ git pull
+                There is no tracking information for the current branch.
+                Please specify which branch you want to merge with.
+                See git-pull(1) for details.
+                    git pull <remote> <branch>
+                If you wish to set tracking information for this branch you can do so with:
+                    git branch --set-upstream-to=origin/<branch> master
+
+            2-2) 최초로 원격저장소를 push하게 되면 다음과 같은 메시지를 볼 수 있다.
+                $ git push
+                fatal: The current branch master has no upstream branch.
+                To push the current branch and set the remote as upstream, use
+                    git push --set-upstream origin master
+
+        3) --set-upstream 
+
+            앞에서 다룬 메시지는 원격저장소에 위치한 브랜치를 추적하기 위한 로컬 저장소의 브랜치가 정해지지 않았다는 의미
+
+        4) pull 파헤치기(git pull first dog)
+            
+            4-1) pull 옆에 우리가 받아오고자 하는 원격 저장소의 이름과 원격 저장소에서 받아오고자 하는 브랜치의 이름을 적는다.
+
+            4-2) pull 을 했을 때 다음과 같이 트래킹 브랜치가 생성되며 원격 저장소에서의 dog 브랜치가 위치한 위치를 보여준다.
+                    first 원격 저장소 : c1-c2(master)-c3(dog)
+                    지역 저장소 : c1-c2-c3(HEAD -> master, first/dog)
+
+            4-3) 트래킹 브랜치가 생성되었지만 로컬저장소에서 트래킹 브랜치와 연결된 브랜치가 존재하지 않는다.
+
+            4-4) cat이라는 브랜치를 만들고 아래의 명령으로 트래킹 브랜치와 연결시키기
+                    git branch --set-upstream-to=first/dog cat
+
+            4-5) 만약 원격저장소의 dog 브랜치에 새로운 commit이 올라오게 되더라도 cat 브랜치에서 git pull을 실행하면
+                트래킹 브랜치가 위치해 있는 곳까지 fast-forward가 이루어집니다
+
+        5) push 파헤치기(git push origin master)
+
+            5-1) git clone 명령어로 저장소를 복사해온 것이 아니면 처음 push 할 때 실제로는 git push origin master 명령 사용
+                push 옆에 데이터를 전송하고자 하는 원격저장소와 push하기 희망하는 로컬저장소의 브랜치 이름을 적어준다.
+
+            5-2) remote 등록 (git remote add second https://github.com/group/project2)
+
+            5-3) second 원격저장소는 현재 비어있는 상태 입니다. git remote second cat 명령으로 push를 진행
+
+            5-4) cat 브랜치 까지의 내용이 second 저장소로 push 된다.
+
+            5-5) 아직 로컬저장소의 cat 브랜치가 원격저장소의 cat 브랜치와 트래킹 되지 않은 상태이다.
+
+            5-6) 로컬과 원격 브랜치가 아직 서로 연결이 안되어 있기 때문에 바로 git push second로 명령어를 사용할 수 없다.
+
+            5-7) cat 브랜치를 트래킹 해주기 위해서 아래 명령어를 사용
+                git branch –set-upstream-to=second/cat cat
+
+            5-8) 또는 아래와 같이 push와 동시에 트래킹을 설정할 수 있습니다
+                git push --set-upstream second cat
+
+        6) 결론
+            
+            6-1) 트래킹 브랜치는 저장소에 존재하는 특정 브랜치의 위치를 알려줍니다.
+            
+            6-2)트래킹 브랜치의 정보를 이용해서 내가 원하는 브랜치와 서로 트래킹을 시켜주고 지속적으로 관리할 수 있습니다
