@@ -1,4 +1,5 @@
 1. Git Issue란?
+
     (1) 이슈 : 오류, 버그 및 새로운 기능, 작업요청, 사소한 질문이나 의견 등 제품에 관해 회사에서 대화의 대상이 되는 거의 모든 것
 
     (2) issue는 왜 남길까?
@@ -64,5 +65,68 @@
 
         7) Milestone을 사용하면 Issue들의 진척도를 확인하기 수월해진다.
 
+--------------------------------------------------------------------------------------------------------------------------------------
+
+2. MR(Merge Request)란?
+
+    (1) MR : 다른 branch의 변경 사항을 반영하기 위한 요청
+
+        1) 새로운 코드를 추가하여 branch에 반영(병합/merge)하고자 합니다. merge를 Request합니다.
+
+        2) 코드를 반영하기 전에 검수 과정을 거치는 것.
+
+    (2) MR을 하는 이유
+
+        1) 장점
+            차의 구성품 : 차체, 바퀴, 에어컨, ...
+            master branch of car : 차체 branch + 바퀴 branch + 에어컨 branch + 네이게이션 branch + ...
+            
+            1) 코드리뷰
+
+            2) master branch의 안정성 유지
+
+            3) 보안 : 사람에 의한 해킹 방지(코드리뷰를 하고 반영시키기 때문에)
+
+        2) 설정 : 최고 Approver 수와 특정 사람의 승인을 Merge 조건으로 걸 수 있다.
+
+    (3) Merge Request 실습
+
+        1) 원격 저장소에서 지역 저장소로 clone
+        
+        2) git pull 후 새로운 작업을 위한 branch 생성(v1.5)
+
+        3) 수정 사항 작성 후 git add " ", git commit -m " ", git push --set-upsteam origin v1.5
+
+        4) 원격 저장소(gitlab의 해당 프로젝트)에서 MR 탭 - new merge Request 생성
+
+        5) source branch와 target branch 설정, branch 비교하고 진행하기 클릭
+
+        6) title, description 등 설정을 변경하고, Submit merge Request 클릭 -> v1.5라는 MR이 생성된다.
+
+        7) 해당 MR에 대해서 코드를 확인하고, merge 버튼을 누르면 master branch에 변경사항이 반영된다.
+
+    (4) 실제 프로젝트에 MR을 적용하기(issue와 연동)
+
+        1) bug와 관련된 새로운 issue 발생
+
+        2) '해당 issue의 상세보기 하단에 create merge Request 버튼'을 확인할 수 있다.
+
+            2-1) 이슈에서 branch를 생성하여, branch merge Request 허용시 자동적으로 이슈를 해결하는 방법에서 가장 중요한 부분이다.
+
+        3) create merge Request and branch : 수정 후 MR을 보낸 후에도, merge가 승인될 때까지 수정한 모든 사항이 반영된다.
+            이 때 생성된 branch에서 계속 작업을 해도 되는 것이다.
+
+        4) MR 생성 후 생성된 branch(bug)를 로컬 저장소에서 연다.
+            git pull
+            git checkout bug
+
+        5) 수정사항 작성 후 push한다.
+            git add .
+            git commit -m
+            git push --set-upstream origin bug
+
+        6) 원격 저장소에 merge Request에 들어가 merge를 허용한다.
+
+        7) issue에 들어가보면 해당 bug issue가 자동적으로 closed 되어있는 것을 확인할 수 있다.
 
     
