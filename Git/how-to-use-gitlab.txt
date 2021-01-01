@@ -16,3 +16,53 @@
     (4) Markdown 작성법 : gitalb은 GitLab Flavored Markdown(GFM)을 지원한다.
 
         1) 제목 : #의 개수로 표시(h1~h6까지 표현 가능)
+
+    (5) issue Label : hash tag, 글의 목적을 쉽게 파악할 수 있다.
+
+        1) 카테고리, 난이도, 중요도, 이슈 구분, 발생위치, 발생 OS 등 필요한 요소에 맞추어 약속하여 사용한다.
+
+        2) 자주 사용되는 Label의 종류
+
+            2-1) 타입 - 버그, 기능개선, 신기능, 논의사항...
+
+            2-2) (진행)상태 - New, In Progress, In Review, Done...
+
+            2-3) 카테고리 - Front-end, Back-end, UI...
+
+    (6) 팀원과 이슈를 공유하는 방법(1) : issue Template, Web Hook
+
+        1) 이슈 유형별 Template을 만들어 사용하면 편리하다.
+
+            1-1) .gitlab/issue_templates/bug_templates.md (마크다운 파일 작성해두기)
+
+        2) 이벤트가 발생하면, 다른 곳으로 알림을 준다.
+
+            2-1) slack : gitlab-notifications 설치 - add apps - incomming webhooks 설치
+                https://docs.gitlab.com/ee/user/profile/notifications.html
+
+            2-2) 채널을 선택하고, url을 복사해서 gitlab - slack notifications 옵션에서 설정하기
+
+    (7) issue와 board의 관계
+
+        1) board에서 issue의 진행 상태별로 볼 수 있다.
+
+        2) board를 추가해서, 새로운 상태 리스트를 만들어 사용할 수 있다.(bug, 기능 개선 등)
+
+    (8) Milestones(마일스톤) : 목표
+
+        1) 보통 버전을 마일스톤으로 사용한다.
+
+        2) title, description, start date, due date를 설정한다.
+
+        3) new issue 생성 시 Milestones을 설정하고, Label을 설정한다
+
+        4) issue를 할당하고, close 할 때마다 Milestones의 진행률이 올라간다.
+
+        5) 프로젝트 이슈를 관리하기 위해 사용한다.
+
+        6) 이슈를 Milestone로 묶을 수 있다.
+
+        7) Milestone을 사용하면 Issue들의 진척도를 확인하기 수월해진다.
+
+
+    
