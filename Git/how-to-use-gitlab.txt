@@ -237,9 +237,36 @@
             3-1) subgroup도 설정 가능 - 개발팀 - 백엔드팀 - 서버팀 : 상위 그룹 멤버를 상속받는다.
             3-2) 프로젝트 생성 시 그룹단위로 초대가 가능하다
 
-    (3) Lint의 중요성
+    (3) Lint의 중요성 : 기술부채 방지
 
-    (4) 통계
+        1) 문자가 될 소지가 있는 자잘한 문제점들을 찾아주는 기능(함수 한 줄로 작성 등과 같이)
+
+            1-1) ''와 "" 등의 방식을 통일
+            1-2) 누락된 ; 찾아주기
+            1-3) 선언됐지만 사용되지 않은 변수 찾아주기
+            1-4) 사용되었지만 선언되지 않은 변수 찾아주기
+
+        2) 당장 프로그램에서 문제가 되는 것은 아니지만, 문제가 쌓이면 기술부채가 발생한다. (중요도는 높지만, 당장 해결하지 않아도 되는 문제)
+
+        3) CI stage에서 test 앞에 lint를 확인할 수 있다. 
+
+        4) npm install --save-dev eslint # 설치
+            ./node_modules/.bin/eslint --init # lint 설정
+            ./node_modules/.bin/eslint . # 실행
+
+    (4) 통계(Analytics)
+
+        1) 확인할 수 있는 정보
+            1-1) MR이 생성되고 merge/close 되기까지 걸린 평균 시간
+            1-2) 커밋별 CI/CD에 걸린 시간
+            1-3) CI/CD 실행 추세 및 pass 된 수 
+            등
+
+        2) 다양한 통계에 대해선 차후 확인해보기
 
     (5) Operations
+        1) Metrics : 서버의 시간별 메모리 사용량 등이 저장된다.
+        2) Environments : staging server(여러개) + production server, 여러 환경을 관리하기 위해 사용된다.(각 환경 버전 관리)
+        3) Error Tracking : sentry.io(대표적인 서비스)를 gitlab에 연동하여 error를 트래킹하기 쉽게 만들 수 있다.
+        4) Feature Flags : 특정 기능에 문제가 생겼다면, 해당 기능을 on/off 할 수 있도록 한다.
     
