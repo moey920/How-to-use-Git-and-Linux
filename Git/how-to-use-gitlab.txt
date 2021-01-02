@@ -169,6 +169,55 @@
 
     (3) CI로 자동화 시키기
 
-    (4) CD
+        1) gitlab과 연동한 지역저장소 폴더에  .gitlab-ci.yml 파일 생성
+            
+            image: node:latest #가장 최근의 노드 이미지 활용
 
+            stages :
+            -test #테스트 기능을 거친다
+
+            cache:
+            paths:
+                -node_modules/
+
+            testing: #테스트라는 단계를 거치고, 테스트가 진행될 때는 관련 스크립트를 실행
+            stage : test
+            script :
+                - npm install
+                - npm test
+
+        2) git pull, git all, git commit, git push 후 gitlab CI/CD 탭에서 Pipelines를 확인할 수 있다.
+
+        3) stage
+
+            3-1) 앞 스테이지가 끝나야 다음 스테이지가 실행된다.
+            3-2) 단계별로 실행될 스크립트를 자유롭게 설정할 수 있다.(실행될 스크립트를 stage단위로 나눔)
+            3-3) 특정 branch에서만 실행되도록 설정할 수 있다. (only 옵션 사용)
+                only :
+                    master
+            3-4) stage는 원하는대로 추가가 가능하며 test, build, deploy 외에도 다양하게 추가할 수 있다.
+
+        4) MR에 CI를 연동하는 방법 : 프로젝트의 MR 설정에서 Pipeline이 성공되어야 하게 설정한다.
+            gitlab의 프로젝트 설정 중에는 Pipeline이 pass되어야만 merge가 가능하게 설정해주는 기능이 있다.
+            이를 이용하여 테스트/빌드가 실패한 경우에는 MR을 merge할 수 없도록 구성할 수 있다.
+
+    (4) CD : Continuos Deploy
+
+        1) stage : bulid - test - deploy는 단계별로 실행을 마쳐야 다음 단계를 실행할 수 있다.
+
+        2) API key가 필요하다. gitlab - settings - CI/CI - variables - API key, APP production 설정(heroku에서 받아오기)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+4. 알쓸깃잡(gitlab wiki and member)
+
+    (1) wiki
+
+    (2) Member 권한과 접근
+
+    (3) Lint의 중요성
+
+    (4) 통계
+
+    (5) Operations
     
